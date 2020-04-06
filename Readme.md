@@ -1,5 +1,12 @@
-
 # Challenge 01
+
+We need create the following:
+
+1. GKE Cluster
+2. NGINX Controller
+3. Deploy an Python app with 2 endpoints:
+    - /greetings → "Hello World from $HostName"
+    - /square?x=value1&y=value2 → "**x**" is the base and "**y**" is exponential
 
 # **Pre-requisites**
 
