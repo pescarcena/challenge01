@@ -1,0 +1,9 @@
+*/bin/
+*/node_modules/
+.DS_Store
+kubeconfig
+credentials.json
+Pulumi.dev.yaml
+.vscode
+pythonAppIp
+.env
