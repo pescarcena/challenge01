@@ -35,7 +35,7 @@ create() {
 destroy() {
 	
 	#Destroy proyect
-	sh destory.sh
+	sh destroy.sh
 
 	exit
 }
