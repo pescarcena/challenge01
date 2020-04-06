@@ -12,6 +12,9 @@ echo '**************************************************************************
 pulumi config set gcp:project ${GCP_PROJECT_ID}
 pulumi config set gcp:region ${GKE_REGION}
 pulumi config set gcp:zone ${GKE_ZONE}
+pulumi config set appname ${DOCKER_BUILD_NAME}
+pulumi config set appport ${PY_SERVER_PORT}
+pulumi config set appgkeid $GCP_PROJECT_ID
 
 echo '*************************************************************************************************'
 echo 'PULUMI SELECT STACK'

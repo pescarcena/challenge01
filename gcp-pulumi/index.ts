@@ -4,6 +4,8 @@ import * as gcp from "@pulumi/gcp";
 
 const name = "gke-cluster";
 
+const config = new pulumi.Config();
+
 // Create a GKE cluster
 const engineVersion = gcp.container.getEngineVersions().latestMasterVersion;
 
@@ -133,7 +135,10 @@ export const servicePublicIP = service.status.apply(s => s.loadBalancer.ingress[
 
 
 // Deploy Python APP
-const pythonAppName = "py-server";
+const pythonAppName = config.require("appname");
+const  pythonAppPort = Number(config.require("appport"));
+let appgkeid = config.require("appname");
+
 let pyServerLabels = { appClass: pythonAppName };
 const deploymentPyServer = new k8s.apps.v1.Deployment(pythonAppName,
     {
@@ -152,8 +157,8 @@ const deploymentPyServer = new k8s.apps.v1.Deployment(pythonAppName,
                     containers: [
                         {
                             name: pythonAppName,
-                            image: "gcr.io/pulumi-273105/py-server:latest",
-                            ports: [{ name: "http", containerPort: 8000 }]
+                            image: "gcr.io/"+appgkeid+"/"+pythonAppName+":latest",
+                            ports: [{ name: "http", containerPort: pythonAppPort }]
                         }
                     ],
                 }
@@ -177,7 +182,7 @@ const servicePythonApp = new k8s.core.v1.Service(pythonAppName,
         },
         spec: {
             type: "LoadBalancer",
-            ports: [{ port: 8000, targetPort: "http" }],
+            ports: [{ port: pythonAppPort, targetPort: "http" }],
             selector: pyServerLabels,
         },
     },
