@@ -3,7 +3,7 @@ echo 'PULUMI PROJECT'
 echo '*************************************************************************************************'
 #go into pulumi proyect
 cd 'gcp-pulumi'
-#npm install
+npm install
 
 echo '*************************************************************************************************'
 echo 'PULUMI CONFIG'
@@ -12,8 +12,12 @@ echo '**************************************************************************
 pulumi config set gcp:project ${GCP_PROJECT_ID}
 pulumi config set gcp:region ${GKE_REGION}
 pulumi config set gcp:zone ${GKE_ZONE}
-#pulumi stack init dev --non-interactive
-#pulumi stack select dev --non-interactive
+
+echo '*************************************************************************************************'
+echo 'PULUMI SELECT STACK'
+echo '*************************************************************************************************'
+pulumi stack init dev --non-interactive
+# pulumi stack select dev --non-interactive
 #pulumi stack --non-interactive
 
 echo '*************************************************************************************************'
